@@ -18,6 +18,19 @@ class LinkedList:
         self.head = None
         self.tail = None
 
+    def add_to_head(self, value):
+        # 1.) create a Node from the value
+        new_node = Node(value)
+
+        if self.head is None and self.tail is None:
+            self.head = new_node
+            self.tail = new_node
+
+        else:
+            old_head = self.head
+            self.head = new_node
+            self.head.set_next(old_head)
+
     def add_to_tail(self, value):
         # 1. create the Node from the value
         new_node = Node(value)
