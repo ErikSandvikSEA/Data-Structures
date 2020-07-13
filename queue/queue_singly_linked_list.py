@@ -18,6 +18,19 @@ class LinkedList:
         self.head = None
         self.tail = None
 
+    def add_to_head(self, value):
+        # 1.) create a Node from the value
+        new_node = Node(value)
+
+        if self.head is None and self.tail is None:
+            self.head = new_node
+            self.tail = new_node
+
+        else:
+            old_head = self.head
+            self.head = new_node
+            self.head.set_next(old_head)
+
     def add_to_tail(self, value):
         # 1. create the Node from the value
         new_node = Node(value)
@@ -60,23 +73,37 @@ class LinkedList:
         self.head = self.head.get_next()
         return val
 
+    # def remove_tail(self):
+    #     # if we have an empty linked list
+    #     if self.head is None and self.tail is None:
+    #         return
+    #     # if we have a non-empty linked list
+    #     # we have to start at the head and move down the linked list
+    #     # until we get to the node right before the tail
+    #     # iterate over our linked list
+    #     current = self.head
+    #     while current.get_next() is not self.tail:
+    #         current = current.get_next()
+    #     # at this point, `current` is the node right before the tail
+    #     # set the tail to be None
+    #     val = self.tail.get_value()
+    #     # move self.tail to the Node right before
+    #     self.tail = current
+    #     return val
+
     def remove_tail(self):
-        # if we have an empty linked list
-        if self.head is None and self.tail is None:
+        if self.head is None:
             return
-        # if we have a non-empty linked list
-        # we have to start at the head and move down the linked list
-        # until we get to the node right before the tail
-        # iterate over our linked list
+
         current = self.head
-        while current.get_next() is not self.tail:
+
+        while current.get_next() and current.get_next() is not self.tail:
             current = current.get_next()
-        # at this point, `current` is the node right before the tail
-        # set the tail to be None
-        val = self.tail.get_value()
-        # move self.tail to the Node right before
+
+        value = self.tail.get_value()
         self.tail = current
-        return val
+        self.tail.set_next(None)
+        return value
 
     def contains(self, value):
         if not self.head:
