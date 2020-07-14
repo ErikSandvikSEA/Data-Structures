@@ -22,12 +22,6 @@ class Stack:
         self.storage = LinkedList()
 
     def __len__(self):
-        # count = 0
-        # current = self.storage.head
-        # while current:
-        #     current = current.get_next()
-        #     count += 1
-        # return count
         return self.size
 
     def push(self, value):
