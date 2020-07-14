@@ -33,7 +33,24 @@ class DoublyLinkedList:
     """
 
     def add_to_head(self, value):
-        pass
+        new_node = ListNode(value)
+        self.length += 1
+
+        if self.length == 0:
+            self.head = new_node
+            self.tail = new_node
+        else:
+            # capture the old head
+            old_head = self.head
+
+            # change the head to the new value
+            self.head = new_node
+
+            # set the new head's next to the old_head
+            self.head.next = old_head
+
+            # set the old head's prev to be the new value
+            old_head.prev = new_node
 
     """
     Removes the List's current head node, making the
