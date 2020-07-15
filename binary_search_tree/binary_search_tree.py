@@ -19,8 +19,31 @@ class BSTNode:
 
     # Insert the given value into the tree
     def insert(self, value):
-        pass
+        # compare the input value with the value of the Node
+        # if value < Node's value
+        if value < self.value:
+            # we need to go left
+            # if we see that there is no left child,
+            if self.left is None:
+                # then we can wrap the value in a BSTNode and park it
+                self.left = BSTNode(value)
+            # otherwise there is a child
+            else:
+                # call the left child's 'insert' method
+                self.left.insert(value)
+        # otherwise, value >- Node's value
+        else:
+            # we need to go right
+            # if we see there is no right child,
+            if self.right is None:
+                # then we can wrap the value in a BSTNode and park it
+                self.right = BSTNode(value)
+            # otherwise there is a child
+            else:
+                # call the right child's 'insert' method
+                self.right.insert(value)
 
+    # Search logic
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
@@ -32,7 +55,17 @@ class BSTNode:
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
-        pass
+        fn(self.value)
+        if self.left is None and self.right is None:
+            return
+        else:
+            if self.left is None:
+                self.right.for_each(fn)
+            elif self.right is None:
+                self.left.for_each(fn)
+            else:
+                self.left.for_each(fn)
+                self.right.for_each(fn)
 
     # Part 2 -----------------------
 
