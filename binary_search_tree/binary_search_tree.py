@@ -80,30 +80,57 @@ class BSTNode:
             return self.right.get_max()
 
     # Call the function `fn` on the value of each node
+    # def for_each(self, fn):
+    #     fn(self.value)
+    #     if self.left is None and self.right is None:
+    #         return
+    #     else:
+    #         if self.left is None:
+    #             self.right.for_each(fn)
+    #         elif self.right is None:
+    #             self.left.for_each(fn)
+    #         else:
+    #             self.left.for_each(fn)
+    #             self.right.for_each(fn)
+
+    # lecture alt (recursive)
     def for_each(self, fn):
         fn(self.value)
-        if self.left is None and self.right is None:
-            return
-        else:
-            if self.left is None:
-                self.right.for_each(fn)
-            elif self.right is None:
-                self.left.for_each(fn)
-            else:
-                self.left.for_each(fn)
-                self.right.for_each(fn)
+
+        if self.left:
+            self.left.for_each(fn)
+
+        if self.right:
+            self.right.for_each(fn)
 
     # Part 2 -----------------------
 
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
-        pass
+        if node.left is not None:
+            self.in_order_print(node.left)
+        print(node.value)
+        if node.right is not None:
+            self.in_order_print(node.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+        from collections import deque
+
+        queue = deque()
+        queue.append(self)
+
+        # continue to traverse so long as there are nodes in the queue
+        while len(queue) > 0:
+            current_node = queue.popleft()
+            if current_node.left:
+                queue.append(current_node.left)
+            if current_node.right:
+                queue.append(current_node.right)
+
+            print(current_node.value)
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
